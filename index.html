@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario de Cliente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      background-color: #272727;
+      color: #ffffff;
+    }
+
+    .container-fluid {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #333333;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+
+    /* Estilos personalizados */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .feedback-icon {
+      position: absolute;
+      right: 10px;
+      top: 40px;
+      color: #28a745;
+    }
+
+    .feedback-icon.invalid {
+      color: #dc3545;
+    }
+
+    /* Estilos para la vista de éxito */
+    .success-view {
+      display: none;
+      text-align: center;
+    }
+
+    .success-view p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .success-view .btn {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <h2 class="text-center mt-4">Formulario de Cliente</h2>
+    <form id="formulario-cliente">
+      <div class="form-group row">
+        <label for="razon-social" class="col-sm-3 col-form-label">Razón Social:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="razon-social" name="razon-social" required>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="rfc" class="col-sm-3 col-form-label">RFC:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="rfc" name="rfc" required pattern="[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}">
+          <small class="form-text text-muted">El RFC debe tener el formato AAAA999999AAA.</small>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="direccion-fiscal" class="col-sm-3 col-form-label">Dirección Fiscal:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="direccion-fiscal" name="direccion-fiscal" required>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="codigo-postal" class="col-sm-3 col-form-label">Código Postal:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="codigo-postal" name="codigo-postal" required>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" name="email" required>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="forma-pago" class="col-sm-3 col-form-label">Forma de Pago:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="forma-pago" name="forma-pago" required>
+            <option value="">Seleccionar</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+            <option value="Tarjeta de débito">Tarjeta de débito</option>
+            <option value="Transferencia bancaria">Transferencia bancaria</option>
+            <option value="Por definir">Por definir</option>
+          </select>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="uso-cfdi" class="col-sm-3 col-form-label">Uso de CFDI:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="uso-cfdi" name="uso-cfdi" required>
+            <option value="G03 Gastos en general">G03 Gastos en general</option>
+            <option value="I06 Comunicaciones Telefonicas">I06 Comunicaciones Telefonicas</option>
+            <option value="I07 Comunicaciones Satelitales">I07 Comunicaciones Satelitales</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="metodo-pago" class="col-sm-3 col-form-label">Método de Pago:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="metodo-pago" name="metodo-pago" required>
+            <option value="">Seleccionar</option>
+            <option value="Pago en una sola exhibición">Pago en una sola exhibición</option>
+            <option value="Pago en parcialidades">Pago en parcialidades</option>
+          </select>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="regimen-fiscal" class="col-sm-3 col-form-label">Régimen Fiscal:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="regimen-fiscal" name="regimen-fiscal" required>
+            <option value="">Seleccionar</option>
+            <option value="Persona Moral">Persona Moral</option>
+            <option value="Persona Física">Persona Física</option>
+          </select>
+          <i class="feedback-icon"></i>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" id="btn-submit">Enviar</button>
+        <button type="button" class="btn btn-secondary" id="enviar-ticket" disabled>Enviar Ticket a Mikrowisp</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal de éxito -->
+  <div class="modal fade" id="modal-exito" tabindex="-1" role="dialog" aria-labelledby="modal-exito-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-exito-label">Éxito</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Su formulario ha sido enviado correctamente.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista de éxito -->
+  <div class="success-view" id="success-view">
+    <h3>¡Envío Exitoso!</h3>
+    <p>Su formulario ha sido enviado correctamente.</p>
+    <button type="button" class="btn btn-primary" id="back-to-form">Regresar al Formulario</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+
+    // Validación del RFC
+    const rfcInput = document.getElementById('rfc');
+    rfcInput.addEventListener('input', function (event) {
+      const rfc = event.target.value.toUpperCase();
+      const rfcRegex = /^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$/;
+      if (!rfcRegex.test(rfc)) {
+        rfcInput.setCustomValidity('El RFC debe tener el formato AAAA999999AAA');
+      } else {
+        rfcInput.setCustomValidity('');
+      }
+    });
+
+    // Validación del formulario
+    const formulario = document.getElementById('formulario-cliente');
+    const feedbackIcons = document.querySelectorAll('.feedback-icon');
+    formulario.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (formulario.checkValidity()) {
+        enviarFormulario();
+      } else {
+        formulario.classList.add('was-validated');
+      }
+      setFeedbackIcons();
+    });
+
+    function setFeedbackIcons() {
+      feedbackIcons.forEach(function (icon) {
+        const input = icon.parentElement.querySelector('input, select');
+        if (input && !input.validity.valid) {
+          icon.classList.add('invalid');
+        } else {
+          icon.classList.remove('invalid');
+        }
+      });
+    }
+
+    function enviarFormulario() {
+      const form = document.getElementById('formulario');
+const enviarBtn = document.getElementById('enviar');
+
+// Manejar el evento de clic del botón de enviar
+enviarBtn.addEventListener('click', (event) => {
+  event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
+
+  // Obtener los valores de los campos del formulario
+  const razonSocial = document.getElementById('razonSocial').value;
+  const rfc = document.getElementById('rfc').value;
+  const direccionFiscal = document.getElementById('direccionFiscal').value;
+  const codigoPostal = document.getElementById('codigoPostal').value;
+  const email = document.getElementById('email').value;
+
+  // Crear un objeto con los datos del formulario
+  const formData = {
+    razonSocial,
+    rfc,
+    direccionFiscal,
+    codigoPostal,
+    email
+  };
+
+  // Enviar los datos del formulario al servidor
+  fetch('/enviar-correo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message); // Mostrar mensaje de éxito o error en la consola
+      form.reset(); // Limpiar el formulario después de enviarlo
+    })
+    .catch(error => {
+      console.error('Error:', error); // Mostrar cualquier error en la consola
+    });
+});
+    }
+
+    function toggleSuccessView() {
+      const formView = document.getElementById('formulario-cliente');
+      const successView = document.getElementById('success-view');
+      formView.style.display = 'none';
+      successView.style.display = 'block';
+    }
+
+    const backToFormButton = document.getElementById('back-to-form');
+    backToFormButton.addEventListener('click', function () {
+      const formView = document.getElementById('formulario-cliente');
+      const successView = document.getElementById('success-view');
+      formView.style.display = 'block';
+      successView.style.display = 'none';
+    });
+
+  </script>
+</body>
+</html>
