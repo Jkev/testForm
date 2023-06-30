@@ -248,13 +248,46 @@
     }
 
     function enviarFormulario() {
-      // Simulación de envío exitoso (puedes reemplazar esto con tu lógica de envío real)
-      setTimeout(function () {
-        formulario.reset();
-        formulario.classList.remove('was-validated');
-        setFeedbackIcons();
-        toggleSuccessView();
-      }, 1000);
+      const form = document.getElementById('formulario');
+const enviarBtn = document.getElementById('enviar');
+
+// Manejar el evento de clic del botón de enviar
+enviarBtn.addEventListener('click', (event) => {
+  event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
+
+  // Obtener los valores de los campos del formulario
+  const razonSocial = document.getElementById('razonSocial').value;
+  const rfc = document.getElementById('rfc').value;
+  const direccionFiscal = document.getElementById('direccionFiscal').value;
+  const codigoPostal = document.getElementById('codigoPostal').value;
+  const email = document.getElementById('email').value;
+
+  // Crear un objeto con los datos del formulario
+  const formData = {
+    razonSocial,
+    rfc,
+    direccionFiscal,
+    codigoPostal,
+    email
+  };
+
+  // Enviar los datos del formulario al servidor
+  fetch('https://server-digy-iqywzylyj-jkev.vercel.app/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.message); // Mostrar mensaje de éxito o error en la consola
+    form.reset(); // Limpiar el formulario después de enviarlo
+  })
+  .catch(error => {
+    console.error('Error:', error); // Mostrar cualquier error en la consola
+  });
+});
     }
 
     function toggleSuccessView() {
